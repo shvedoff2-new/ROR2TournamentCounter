@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ROR2TournamentCounter"
         mc:Ignorable="d"
-        Title="ROR2 Tournament Counter - Настройки" Height="350" Width="1100"
+        Title="ROR2 Tournament Counter - Settings" Height="350" Width="1100"
         AllowsTransparency="True" WindowStyle="None" Background="Transparent"
         Icon="/Resources/Images/logo.ico">
     <Grid Background="#90000000" MouseDown="Navigation_MouseDown">
@@ -28,23 +28,23 @@
 
         <StackPanel Height="320" Width="350" HorizontalAlignment="Left" Margin="20,25,0,0">
             <StackPanel x:Name="Player1">
-                <Label Content="Игрок 1:" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
-                <TextBlock Text="Ник:" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <Label Content="{DynamicResource player1}" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <TextBlock Text="{DynamicResource nick}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <TextBox x:Name="Nickname1" Margin="20,0,0,0" TextChanged="Nickname1_TextChanged" MaxLength="16" FontSize="15" Style="{DynamicResource TBNick}" Height="20" Width="200" HorizontalAlignment="Left"/>
-                <TextBlock Text="Twitch канал:" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <TextBlock Text="{DynamicResource twitch}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top" Margin="20,0,0,0">
-                    <TextBox x:Name="StreamUrlTextBox" FontSize="15"
+                    <TextBox x:Name="StreamUrlTextBox" FontSize="15" Height="20"
                      Width="200" 
                      Margin="0,0,10,0"
                      VerticalAlignment="Center"
                      Text="channelname" Style="{DynamicResource TBNick}"/>
-                    <Button x:Name="LoadStreamButton" 
-                    Content="Загрузить стрим"
+                    <Button x:Name="LoadStreamButton" Width="100"
+                    Content="{DynamicResource loadstream}"
                     Click="LoadStreamButton_Click"
                     Padding="10,5"
                     Style="{DynamicResource Btn}"/>
                 </StackPanel>
-                <TextBlock Text="Счёт:" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <TextBlock Text="{DynamicResource count}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                     <Button Content="&lt;" x:Name="DecrementButton1" Click="DecrementButton1_Click" Style="{DynamicResource Btn}" FontSize="18" Width="20"/>
                     <TextBox x:Name="Count1" Width="50" Height="21" Text="0" TextAlignment="Center" TextChanged="Count1_TextChanged" IsReadOnly="True" FontSize="17" Style="{DynamicResource TBNick}"/>
@@ -53,23 +53,23 @@
             </StackPanel>
 
             <StackPanel x:Name="Player2" Margin="0,20,0,0">
-                <Label Content="Игрок 2:" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
-                <TextBlock Text="Ник:" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <Label Content="{DynamicResource player2}" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <TextBlock Text="{DynamicResource nick}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <TextBox x:Name="Nickname2" Margin="20,0,0,0" TextChanged="Nickname2_TextChanged" MaxLength="16" FontSize="15" Style="{DynamicResource TBNick}" Height="20" Width="200" HorizontalAlignment="Left"/>
-                <TextBlock Text="Twitch канал:" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <TextBlock Text="{DynamicResource twitch}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top" Margin="20,0,0,0">
-                    <TextBox x:Name="StreamUrl2TextBox" FontSize="15"
+                    <TextBox x:Name="StreamUrl2TextBox" FontSize="15" Height="20"
                         Width="200" 
                         Margin="0,0,10,0"
                         VerticalAlignment="Center"
                         Text="channelname" Style="{DynamicResource TBNick}"/>
-                    <Button x:Name="LoadStream2Button" 
-                        Content="Загрузить стрим" 
+                    <Button x:Name="LoadStream2Button" Width="100"
+                        Content="{DynamicResource loadstream}"
                         Click="LoadStream2Button_Click"
                         Padding="10,5"
                         Style="{DynamicResource Btn}"/>
                 </StackPanel>
-                <TextBlock Text="Счёт:" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <TextBlock Text="{DynamicResource count}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                     <Button Content="&lt;" x:Name="DecrementButton2" Click="DecrementButton2_Click" Style="{DynamicResource Btn}" FontSize="18" Width="20"/>
                     <TextBox x:Name="Count2" Width="50" Height="21" Text="0" TextAlignment="Center" TextChanged="Count2_TextChanged" IsReadOnly="True" FontSize="17" Style="{DynamicResource TBNick}"/>
@@ -79,15 +79,15 @@
         </StackPanel>
 
         <StackPanel x:Name="TournamentInfo" Width="370" Height="270" Margin="390,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Label Content="Информация о турнире:" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
-            <TextBlock Text="Название турнира:" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+            <Label Content="{DynamicResource info}" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+            <TextBlock Text="{DynamicResource tourname}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
             <TextBox x:Name="TournamentName" Margin="20,0,0,0" TextChanged="TournamentName_TextChanged" MaxLength="18" FontSize="15" Style="{DynamicResource TBNick}" Height="20" Width="200" HorizontalAlignment="Left"/>
-            <TextBlock Text="Сид:" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+            <TextBlock Text="{DynamicResource seed}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
-                <Button x:Name="Generate_seed" Content="Сгенерировать сид" Style="{DynamicResource Btn}" Click="Gen_Seed_Click"/>
+                <Button x:Name="Generate_seed" Content="{DynamicResource genseed}" Style="{DynamicResource Btn}" Click="Gen_Seed_Click" Width="100"/>
                 <TextBox x:Name="Seed" Margin="20,0,0,0" TextChanged="Seed_TextChanged" MaxLength="10" FontSize="15" Style="{DynamicResource TBNick}" Height="20" Width="80" HorizontalAlignment="Left"/>
             </StackPanel>
-            <TextBlock Text="Выживший:" Margin="20,10,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+            <TextBlock Text="{DynamicResource survivor}" Margin="20,10,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
             <UniformGrid Columns="8" Margin="20,0,0,0" x:Name="SurvivorRadioGrid" Height="130">
                 <RadioButton x:Name="Commando" GroupName="SurvivorGroup" Checked="SurvivorRadio_Checked" FontSize="15" Foreground="White" Tag="Commando" Style="{DynamicResource SurvivorRadioButtonCompactStyle}">
                     <RadioButton.Content>
@@ -187,29 +187,38 @@
             </UniformGrid>
         </StackPanel>
         <StackPanel x:Name="Timer" Width="300" Height="120" HorizontalAlignment="Right" Margin="0,25,20,0" VerticalAlignment="Top">
-            <Label Content="Таймер:" FontSize="15" FontFamily="{DynamicResource Bombardier}" Foreground="White"/>
+            <Label Content="{DynamicResource timer}" FontSize="15" FontFamily="{DynamicResource Bombardier}" Foreground="White"/>
             <TextBox x:Name="TimeDisplay" Text="00:00.00" IsReadOnly="True" TextChanged="TimeDisplay_TextChanged"
                FontSize="24" Style="{DynamicResource TBNick}" Height="30" Width="110"
                HorizontalAlignment="Left" 
                Margin="0,5"/>
 
             <Grid Width="300">
-                <Button x:Name="StartButton" Content="Запустить" Style="{DynamicResource Btn}"
+                <Button x:Name="StartButton" Content="{DynamicResource tplay}" Style="{DynamicResource Btn}"
                 HorizontalAlignment="Left" Width="90" FontSize="14"
                 Click="StartButton_Click"/>
-                <Button x:Name="StopButton" Content="Остановить" Style="{DynamicResource Btn}"
+                <Button x:Name="StopButton" Content="{DynamicResource tstop}" Style="{DynamicResource Btn}"
                 HorizontalAlignment="Center" Width="90" FontSize="14"
                 Click="StopButton_Click"/>
-                <Button x:Name="ResetButton" Content="Сбросить" Style="{DynamicResource Btn}"
+                <Button x:Name="ResetButton" Content="{DynamicResource treset}" Style="{DynamicResource Btn}"
                 HorizontalAlignment="Right" Width="90" FontSize="14"
                 Click="ResetButton_Click"/>
             </Grid>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
-            <Button x:Name="ShowDisplayButton" Content="Показать окно отображения" Style="{DynamicResource Btn}" 
+            <Button x:Name="ShowDisplayButton" Content="{DynamicResource dwshow}" Style="{DynamicResource Btn}" Width="210" 
                     Margin="10" Padding="15,8" FontSize="16" Click="ShowDisplayButton_Click"/>
-            <Button x:Name="HideDisplayButton" Content="Скрыть окно отображения" Style="{DynamicResource Btn}" 
-                    Margin="10" Padding="15,8" FontSize="16" Click="HideDisplayButton_Click"/>
+            <Button x:Name="HideDisplayButton" Content="{DynamicResource dwhide}" Style="{DynamicResource Btn}" Width="210"
+                    Margin="10" Padding="15,8" FontSize="16" Click="HideDisplayButton_Click" Cursor="Hand"/>
         </StackPanel>
+        <Label Content="{DynamicResource language}" FontFamily="{DynamicResource Bombardier}" Foreground="#FFFFFF" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,120,120,0" FontSize="18"/>
+        <ComboBox x:Name="languageComboBox" Height="20" Width="90" Style="{DynamicResource ComboBoxStyle}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,125,20,0" SelectionChanged="LanguageCB_SelectionChanged">
+            <ComboBoxItem Content="English" Tag="en"/>
+            <ComboBoxItem Content="Русский" Tag="ru"/>
+        </ComboBox>
+        <Grid x:Name="notificationBorder" Height="25" Width="100" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="3" Opacity="0">
+            <Polygon Fill="#5fbc51" Points="0,25 0,7 7,0 100,0 100,25"/>
+            <Label Content="{DynamicResource copyseed}" Foreground="#FFFFFF" FontFamily="{DynamicResource Bombardier}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>

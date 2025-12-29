@@ -1,14 +1,13 @@
 ﻿using System;
-using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using static ROR2TournamentCounter.MainWindow;
+using AppSettings = ROR2TournamentCounter.Properties.Settings;
 
 namespace ROR2TournamentCounter
 {
@@ -26,6 +25,7 @@ namespace ROR2TournamentCounter
             {
                 InitializeComponent();
                 InitializeTimer();
+                this.Loaded += SettingsWindow_Loaded;
             }
             catch (Exception ex)
             {
@@ -34,6 +34,10 @@ namespace ROR2TournamentCounter
 
             displayWindow = new MainWindow();
             Commando.IsChecked = true;
+        }
+        private void SettingsWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadSavedLanguage();
         }
 
         private void InitializeTimer()
@@ -45,6 +49,82 @@ namespace ROR2TournamentCounter
 
             isRunning = false;
             UpdateTimeDisplay();
+        }
+        private void LoadSavedLanguage()
+        {
+            try
+            {
+                string savedLanguage = LanguageSettings.Language;
+
+                // Устанавливаем выбранный элемент в ComboBox БЕЗ вызова события
+                languageComboBox.SelectionChanged -= LanguageComboBox_SelectionChanged;
+
+                foreach (ComboBoxItem item in languageComboBox.Items)
+                {
+                    if (item.Tag?.ToString() == savedLanguage)
+                    {
+                        languageComboBox.SelectedItem = item;
+                        break;
+                    }
+                }
+
+                languageComboBox.SelectionChanged += LanguageComboBox_SelectionChanged;
+
+                // Если язык не английский, применяем его
+                if (savedLanguage != "en")
+                {
+                    ChangeLanguage(savedLanguage);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки языка: {ex.Message}");
+                languageComboBox.SelectedIndex = 0;
+            }
+        }
+
+        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (languageComboBox.SelectedItem is ComboBoxItem selectedItem && selectedItem.Tag != null)
+            {
+                string languageCode = selectedItem.Tag.ToString();
+
+                try
+                {
+                    ChangeLanguage(languageCode);
+                    LanguageSettings.Language = languageCode;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка смены языка: {ex.Message}");
+                }
+            }
+        }
+
+        private void ChangeLanguage(string languageCode)
+        {
+            try
+            {
+                var newDict = new ResourceDictionary();
+                newDict.Source = new Uri($"Resources/Languages/{languageCode}.xaml", UriKind.Relative);
+
+                // Удаляем все языковые словари
+                var languageDicts = Application.Current.Resources.MergedDictionaries
+                    .Where(d => d.Source != null && d.Source.OriginalString.Contains("Resources/Languages/"))
+                    .ToList();
+
+                foreach (var dict in languageDicts)
+                {
+                    Application.Current.Resources.MergedDictionaries.Remove(dict);
+                }
+
+                // Добавляем новый
+                Application.Current.Resources.MergedDictionaries.Add(newDict);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки языка: {ex.Message}");
+            }
         }
 
         private void DisplayTimer_Tick(object sender, EventArgs e)
@@ -121,7 +201,7 @@ namespace ROR2TournamentCounter
 
         private void Seed_TextChanged(object sender, TextChangedEventArgs e)
         {
-            displayWindow?.UpdateSeed($"Сид:{Seed.Text}");
+            displayWindow?.UpdateSeed($"{Seed.Text}");
         }
 
         private void TimeDisplay_TextChanged(object sender, TextChangedEventArgs e)
@@ -176,7 +256,6 @@ namespace ROR2TournamentCounter
             displayWindow?.UpdateCount2(Count2.Text);
         }
 
-        // Событие выбора персонажа
         private void Survivor_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var comboBox = sender as ComboBox;
@@ -191,6 +270,39 @@ namespace ROR2TournamentCounter
         {
             int randomNumber = random.Next(0, 100000);
             Seed.Text = randomNumber.ToString("D5");
+            Clipboard.SetText(Seed.Text);
+            ShowNotification();
+        }
+        private void ShowNotification()
+        {
+            Storyboard storyboard = new Storyboard();
+
+            // Появление
+            DoubleAnimation fadeIn = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = TimeSpan.FromSeconds(0.2)
+            };
+
+            // Исчезание (начинается после появления + 2 секунды)
+            DoubleAnimation fadeOut = new DoubleAnimation
+            {
+                From = 1,
+                To = 0,
+                Duration = TimeSpan.FromSeconds(0.5),
+                BeginTime = TimeSpan.FromSeconds(1)
+            };
+
+            Storyboard.SetTarget(fadeIn, notificationBorder);
+            Storyboard.SetTargetProperty(fadeIn, new PropertyPath(OpacityProperty));
+
+            Storyboard.SetTarget(fadeOut, notificationBorder);
+            Storyboard.SetTargetProperty(fadeOut, new PropertyPath(OpacityProperty));
+
+            storyboard.Children.Add(fadeIn);
+            storyboard.Children.Add(fadeOut);
+            storyboard.Begin();
         }
 
         // События загрузки стримов
@@ -305,5 +417,9 @@ namespace ROR2TournamentCounter
             }
         }
 
+        private void LanguageCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

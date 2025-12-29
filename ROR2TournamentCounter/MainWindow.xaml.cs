@@ -275,6 +275,7 @@ namespace ROR2TournamentCounter
         {
             try
             {
+                StreamWebView.Visibility = Visibility.Visible;
                 string embedUrl = $"https://player.twitch.tv/?channel={channelName}&parent=localhost&muted=false&autoplay=true";
                 StreamWebView.CoreWebView2.Navigate(embedUrl);
             }
@@ -288,6 +289,7 @@ namespace ROR2TournamentCounter
         {
             try
             {
+                Stream2WebView.Visibility = Visibility.Visible;
                 string embedUrl = $"https://player.twitch.tv/?channel={channelName}&parent=localhost&muted=false&autoplay=true";
                 Stream2WebView.CoreWebView2.Navigate(embedUrl);
             }

@@ -14,12 +14,40 @@
             <Grid x:Name="Stream1Container"
           Width="850" Height="478"
           HorizontalAlignment="Left" VerticalAlignment="Top">
-                <wv2:WebView2 x:Name="StreamWebView"/>
+                <Border Background="#90000000" Margin="5"/>
+                <Border Height="5" VerticalAlignment="Top" Background="#70FFFFFF" Margin="5"/>
+                <Border Height="5" VerticalAlignment="Bottom" Background="#70FFFFFF" Margin="5"/>
+                <Border Width="5" HorizontalAlignment="Left" Background="#70FFFFFF" Margin="5"/>
+                <Border Width="5" HorizontalAlignment="Right" Background="#70FFFFFF" Margin="5"/>
+                <Border Height="5" Background="#FFFFFF" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" Margin="5"/>
+                <Border Height="15" Background="#FFFFFF" VerticalAlignment="Top" HorizontalAlignment="Left" Width="5" Margin="5"/>
+                <Border Height="5" Background="#FFFFFF" VerticalAlignment="Top" HorizontalAlignment="Right" Width="15" Margin="5"/>
+                <Border Height="15" Background="#FFFFFF" VerticalAlignment="Top" HorizontalAlignment="Right" Width="5" Margin="5"/>
+                <Border Height="5" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="15" Margin="5"/>
+                <Border Height="15" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="5" Margin="5"/>
+                <Border Height="5" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="15" Margin="5"/>
+                <Border Height="15" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="5" Margin="5"/>
+                <Label Content="{DynamicResource placeholder1}" Foreground="#90FFFFFF" FontFamily="{DynamicResource Bombardier}" FontSize="25" Height="50" HorizontalAlignment="Center"/>
+                <wv2:WebView2 x:Name="StreamWebView" Visibility="Hidden"/>
             </Grid>
             <Grid x:Name="Stream2Container"
           Width="850" Height="478"
           HorizontalAlignment="Right" VerticalAlignment="Top">
-                <wv2:WebView2 x:Name="Stream2WebView"/>
+                <Border Background="#90000000" Margin="5"/>
+                <Border Height="5" VerticalAlignment="Top" Background="#70FFFFFF" Margin="5"/>
+                <Border Height="5" VerticalAlignment="Bottom" Background="#70FFFFFF" Margin="5"/>
+                <Border Width="5" HorizontalAlignment="Left" Background="#70FFFFFF" Margin="5"/>
+                <Border Width="5" HorizontalAlignment="Right" Background="#70FFFFFF" Margin="5"/>
+                <Border Height="5" Background="#FFFFFF" VerticalAlignment="Top" HorizontalAlignment="Left" Width="15" Margin="5"/>
+                <Border Height="15" Background="#FFFFFF" VerticalAlignment="Top" HorizontalAlignment="Left" Width="5" Margin="5"/>
+                <Border Height="5" Background="#FFFFFF" VerticalAlignment="Top" HorizontalAlignment="Right" Width="15" Margin="5"/>
+                <Border Height="15" Background="#FFFFFF" VerticalAlignment="Top" HorizontalAlignment="Right" Width="5" Margin="5"/>
+                <Border Height="5" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="15" Margin="5"/>
+                <Border Height="15" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="5" Margin="5"/>
+                <Border Height="5" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="15" Margin="5"/>
+                <Border Height="15" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="5" Margin="5"/>
+                <Label Content="{DynamicResource placeholder2}" Foreground="#90FFFFFF" FontFamily="{DynamicResource Bombardier}" FontSize="25" Height="50" HorizontalAlignment="Center"/>
+                <wv2:WebView2 x:Name="Stream2WebView" Visibility="Hidden"/>
             </Grid>
         </Grid>
         <Grid IsHitTestVisible="False" Margin="0,0,0,0" VerticalAlignment="Top">
@@ -30,13 +58,13 @@
             <TextBlock TextAlignment="Center" Text="0" x:Name="CountPlayer1" Style="{DynamicResource TBBlue}" FontSize="91" Width="48" Margin="0,0,182,231" Height="78"/>
             <TextBlock TextAlignment="Center" Text="0" x:Name="CountPlayer2" Style="{DynamicResource TBBlue}" FontSize="91" Width="48" Margin="182,0,0,231" Height="78"/>
             <StackPanel Height="117" Width="325" Margin="0,0,682,0">
-                <TextBlock Text="Название турнира" x:Name="TournamentNameTB" Style="{DynamicResource TBBlue}" FontSize="33" Width="325" Height="35"/>
-                <TextBox Text="Ник 1" x:Name="Nickname1Player" Style="{DynamicResource TBNick}" IsReadOnly="True" TextAlignment="Center"/>
+                <TextBlock Text="" x:Name="TournamentNameTB" Style="{DynamicResource TBBlue}" FontSize="33" Width="325" Height="35"/>
+                <TextBox Text="Player 1" x:Name="Nickname1Player" Style="{DynamicResource TBNick}" IsReadOnly="True" TextAlignment="Center"/>
             </StackPanel>
 
             <StackPanel Height="117" Width="325" Margin="682,0,0,0">
-                <TextBlock Text="Сид:" x:Name="SeedTB" Style="{DynamicResource TBBlue}" FontSize="39" Width="325" TextAlignment="Right" Height="35"/>
-                <TextBox Text="Ник 2" x:Name="Nickname2Player" Style="{DynamicResource TBNick}" TextAlignment="Center" IsReadOnly="True"/>
+                <TextBlock Text="" x:Name="SeedTB" Style="{DynamicResource TBBlue}" FontSize="39" Width="325" TextAlignment="Right" Height="35"/>
+                <TextBox Text="Player 2" x:Name="Nickname2Player" Style="{DynamicResource TBNick}" TextAlignment="Center" IsReadOnly="True"/>
             </StackPanel>
             <Border Background="#70FFFFFF" Height="4" Width="455" Margin="0,0,585,134"/>
             <Border Background="#70FFFFFF" Height="4" Width="419" Margin="0,134,621,0"/>
