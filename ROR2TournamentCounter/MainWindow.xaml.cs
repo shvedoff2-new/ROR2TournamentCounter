@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Wpf;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -51,7 +52,6 @@ namespace ROR2TournamentCounter
                     "WebView2Data"
                 );
 
-                // Создаём папку, если её нет
                 if (!System.IO.Directory.Exists(userDataPath))
                 {
                     System.IO.Directory.CreateDirectory(userDataPath);
@@ -64,6 +64,9 @@ namespace ROR2TournamentCounter
 
                 await StreamWebView.EnsureCoreWebView2Async(environment);
                 await Stream2WebView.EnsureCoreWebView2Async(environment);
+                await Stream3WebView.EnsureCoreWebView2Async(environment);
+                await Stream4WebView.EnsureCoreWebView2Async(environment);
+
             }
             catch (Exception ex)
             {
@@ -85,7 +88,6 @@ namespace ROR2TournamentCounter
             MaskTranslateTransform.BeginAnimation(TranslateTransform.XProperty, moveMaskAnimation);
         }
 
-        // Методы для обновления отображения из окна настроек
         public void UpdateTimeDisplay(string timeText)
         {
             Dispatcher.Invoke(() =>
@@ -145,12 +147,9 @@ namespace ROR2TournamentCounter
             });
         }
 
-        public void UpdateTournamentName(string name)
+        public void UpdateTournamentMode(string mode)
         {
-            Dispatcher.Invoke(() =>
-            {
-                TournamentNameTB.Text = name;
-            });
+            TournamentModeTB.Text = mode;
         }
 
         public void UpdateSeed(string seed)
@@ -271,27 +270,13 @@ namespace ROR2TournamentCounter
             });
         }
 
-        public void LoadTwitchStream(string channelName)
+        public void LoadTwitchStream(WebView2 webView, string channelName)
         {
             try
             {
-                StreamWebView.Visibility = Visibility.Visible;
+                webView.Visibility = Visibility.Visible;
                 string embedUrl = $"https://player.twitch.tv/?channel={channelName}&parent=localhost&muted=false&autoplay=true";
-                StreamWebView.CoreWebView2.Navigate(embedUrl);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка загрузки стрима: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        public void Load2TwitchStream(string channelName)
-        {
-            try
-            {
-                Stream2WebView.Visibility = Visibility.Visible;
-                string embedUrl = $"https://player.twitch.tv/?channel={channelName}&parent=localhost&muted=false&autoplay=true";
-                Stream2WebView.CoreWebView2.Navigate(embedUrl);
+                webView.CoreWebView2.Navigate(embedUrl);
             }
             catch (Exception ex)
             {

@@ -184,13 +184,10 @@
                             BorderThickness="2"
                             Cursor="Hand">
                         <Grid>
-                            <!-- Картинка персонажа -->
                             <ContentPresenter x:Name="SurvivorContent"
                                             Content="{TemplateBinding Content}"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"/>
-
-                            <!-- Оверлей для выделения выбранного -->
                             <Border x:Name="SelectionOverlay"
                                     Background="#fbfec0"
                                     Opacity="0"
@@ -199,18 +196,13 @@
                     </Border>
 
                     <ControlTemplate.Triggers>
-                        <!-- Состояние когда RadioButton выбрана -->
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="MainBorder" Property="BorderBrush" Value="#fbfec0"/>
                             <Setter TargetName="MainBorder" Property="BorderThickness" Value="3"/>
                         </Trigger>
-
-                        <!-- Состояние при наведении мыши -->
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="MainBorder" Property="BorderBrush" Value="#aaaaaa"/>
                         </Trigger>
-
-                        <!-- Состояние при наведении на выбранную -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True"/>
@@ -261,6 +253,54 @@
                                 <Condition Property="IsChecked" Value="True"/>
                             </MultiTrigger.Conditions>
                         </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Border x:Name="MainBorder"
+                            Width="200" Height="20"
+                            Background="#435466"
+                            BorderBrush="#8a99af"
+                            BorderThickness="2"
+                            Cursor="Hand">
+                        <Grid>
+                            <ContentPresenter x:Name="contentPresenter" Margin="5,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Focusable="False"/>
+                            <Border x:Name="CheckBorder" Width="15" Height="15"
+                                    Background="#435466"
+                                    BorderBrush="#8a99af"
+                                    BorderThickness="3" Margin="0,0,10,0"
+                                    HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="">
+                            </Border>
+                            <Canvas Width="20" Height="15" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,7,0">
+                                <Polygon x:Name="Check" Points="0,9.5 7,15 20,2 17.5,0 6.5,11.5 2,7.5" Fill="#00000000"/>
+                            </Canvas>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MainBorder" Property="Background" Value="#b7be98"/>
+                            <Setter TargetName="MainBorder" Property="BorderBrush" Value="#d8e3bd"/>
+                            <Setter TargetName="CheckBorder" Property="Background" Value="#b7be98"/>
+                            <Setter TargetName="CheckBorder" Property="BorderBrush" Value="#d8e3bd"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="MainBorder" Property="Background" Value="#3a4755"/>
+                            <Setter TargetName="MainBorder" Property="BorderBrush" Value="#6b7a8f"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Check" Property="Fill" Value="#cfdfed"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

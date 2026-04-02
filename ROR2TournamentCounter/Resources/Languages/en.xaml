@@ -3,6 +3,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="info">About tournament:</sys:String>
     <sys:String x:Key="nick">Nickname:</sys:String>
+    <sys:String x:Key="team">Name of Team:</sys:String>
     <sys:String x:Key="count">Count:</sys:String>
     <sys:String x:Key="genseed">Generate seed</sys:String>
     <sys:String x:Key="dwhide">Hide display window</sys:String>
@@ -13,13 +14,15 @@
     <sys:String x:Key="treset">Reset</sys:String>
     <sys:String x:Key="player1">Player 1:</sys:String>
     <sys:String x:Key="player2">Player 2:</sys:String>
+    <sys:String x:Key="team1">Team 1:</sys:String>
+    <sys:String x:Key="team2">Team 2:</sys:String>
     <sys:String x:Key="seed">Seed:</sys:String>
     <sys:String x:Key="survivor">Survivor:</sys:String>
     <sys:String x:Key="timer">Timer:</sys:String>
-    <sys:String x:Key="tourname">Tournament name:</sys:String>
+    <sys:String x:Key="tourname">Tournament mode:</sys:String>
     <sys:String x:Key="twitch">Twitch channel:</sys:String>
-    <sys:String x:Key="placeholder1">Enter the Twitch nickname of the first player and click the "Load Stream" button</sys:String>
-    <sys:String x:Key="placeholder2">Enter the Twitch nickname of the second player and click the "Load Stream" button</sys:String>
+    <sys:String x:Key="placeholder">Enter the Twitch nickname of player and click the "Load Stream" button</sys:String>
     <sys:String x:Key="language">Language:</sys:String>
     <sys:String x:Key="copyseed">Seed copied!</sys:String>
+    <sys:String x:Key="coopmode">Coop mode</sys:String>
 </ResourceDictionary>

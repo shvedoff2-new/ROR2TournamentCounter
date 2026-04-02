@@ -3,6 +3,7 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="info">Информация о турнире:</sys:String>
     <sys:String x:Key="nick">Ник:</sys:String>
+    <sys:String x:Key="team">Название команды:</sys:String>
     <sys:String x:Key="count">Счёт:</sys:String>
     <sys:String x:Key="genseed">Сгенерировать сид</sys:String>
     <sys:String x:Key="dwhide">Скрыть окно отображения</sys:String>
@@ -13,13 +14,15 @@
     <sys:String x:Key="treset">Сбросить</sys:String>
     <sys:String x:Key="player1">Игрок 1:</sys:String>
     <sys:String x:Key="player2">Игрок 2:</sys:String>
+    <sys:String x:Key="team1">Команда 1:</sys:String>
+    <sys:String x:Key="team2">Команда 2:</sys:String>
     <sys:String x:Key="seed">Сид:</sys:String>
     <sys:String x:Key="survivor">Выживший:</sys:String>
     <sys:String x:Key="timer">Таймер:</sys:String>
-    <sys:String x:Key="tourname">Наименование турнира:</sys:String>
+    <sys:String x:Key="tourname">Режим турнира:</sys:String>
     <sys:String x:Key="twitch">Twitch канал:</sys:String>
-    <sys:String x:Key="placeholder1">Введите Twitch ник первого игрока и нажмите кнопку "Загрузить стрим"</sys:String>
-    <sys:String x:Key="placeholder2">Введите Twitch ник второго игрока и нажмите кнопку "Загрузить стрим"</sys:String>
+    <sys:String x:Key="placeholder">Введите Twitch ник игрока и нажмите кнопку "Загрузить стрим"</sys:String>
     <sys:String x:Key="language">Язык:</sys:String>
     <sys:String x:Key="copyseed">Сид скопирован!</sys:String>
+    <sys:String x:Key="coopmode">Кооперативный режим</sys:String>
 </ResourceDictionary>

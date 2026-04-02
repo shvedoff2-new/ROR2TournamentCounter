@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Web.WebView2.Wpf;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -7,7 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
-using AppSettings = ROR2TournamentCounter.Properties.Settings;
 
 namespace ROR2TournamentCounter
 {
@@ -34,6 +34,10 @@ namespace ROR2TournamentCounter
 
             displayWindow = new MainWindow();
             Commando.IsChecked = true;
+            BestOf.SelectedIndex = 0;
+            BestOf.SelectionChanged += BestOf_SelectionChanged;
+            if (BestOf.SelectedItem is ComboBoxItem defaultItem)
+                displayWindow?.UpdateTournamentMode(defaultItem.Content.ToString());
         }
         private void SettingsWindow_Loaded(object sender, RoutedEventArgs e)
         {
@@ -50,13 +54,33 @@ namespace ROR2TournamentCounter
             isRunning = false;
             UpdateTimeDisplay();
         }
+        private int GetMaxCount()
+        {
+            if (BestOf.SelectedItem is ComboBoxItem item)
+            {
+                return item.Tag?.ToString() == "bo5" ? 3 : 2;
+            }
+            return 2;
+        }
+
+        private void BestOf_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int max = GetMaxCount();
+
+            if (int.TryParse(Count1.Text, out int c1) && c1 > max)
+                Count1.Text = max.ToString();
+
+            if (int.TryParse(Count2.Text, out int c2) && c2 > max)
+                Count2.Text = max.ToString();
+            if (BestOf.SelectedItem is ComboBoxItem item)
+                displayWindow?.UpdateTournamentMode(item.Content.ToString());
+        }
         private void LoadSavedLanguage()
         {
             try
             {
                 string savedLanguage = LanguageSettings.Language;
 
-                // Устанавливаем выбранный элемент в ComboBox БЕЗ вызова события
                 languageComboBox.SelectionChanged -= LanguageComboBox_SelectionChanged;
 
                 foreach (ComboBoxItem item in languageComboBox.Items)
@@ -70,7 +94,6 @@ namespace ROR2TournamentCounter
 
                 languageComboBox.SelectionChanged += LanguageComboBox_SelectionChanged;
 
-                // Если язык не английский, применяем его
                 if (savedLanguage != "en")
                 {
                     ChangeLanguage(savedLanguage);
@@ -107,8 +130,6 @@ namespace ROR2TournamentCounter
             {
                 var newDict = new ResourceDictionary();
                 newDict.Source = new Uri($"Resources/Languages/{languageCode}.xaml", UriKind.Relative);
-
-                // Удаляем все языковые словари
                 var languageDicts = Application.Current.Resources.MergedDictionaries
                     .Where(d => d.Source != null && d.Source.OriginalString.Contains("Resources/Languages/"))
                     .ToList();
@@ -117,8 +138,6 @@ namespace ROR2TournamentCounter
                 {
                     Application.Current.Resources.MergedDictionaries.Remove(dict);
                 }
-
-                // Добавляем новый
                 Application.Current.Resources.MergedDictionaries.Add(newDict);
             }
             catch (Exception ex)
@@ -140,12 +159,9 @@ namespace ROR2TournamentCounter
             int milliseconds = elapsed.Milliseconds / 10;
             string fullTime = $"{totalMinutes:D2}:{seconds:D2}.{milliseconds:D2}";
             TimeDisplay.Text = fullTime;
-
-            // Обновляем время в окне отображения
             displayWindow?.UpdateTimeDisplay(fullTime);
         }
 
-        // События кнопок таймера
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             if (!isRunning)
@@ -169,7 +185,6 @@ namespace ROR2TournamentCounter
                 StopButton.IsEnabled = false;
             }
         }
-
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
             stopwatch.Stop();
@@ -182,8 +197,6 @@ namespace ROR2TournamentCounter
             StartButton.IsEnabled = true;
             StopButton.IsEnabled = true;
         }
-
-        // События изменения текста
         private void Nickname1_TextChanged(object sender, TextChangedEventArgs e)
         {
             displayWindow?.UpdateNickname1(Nickname1.Text);
@@ -194,22 +207,10 @@ namespace ROR2TournamentCounter
             displayWindow?.UpdateNickname2(Nickname2.Text);
         }
 
-        private void TournamentName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            displayWindow?.UpdateTournamentName(TournamentName.Text);
-        }
-
         private void Seed_TextChanged(object sender, TextChangedEventArgs e)
         {
             displayWindow?.UpdateSeed($"{Seed.Text}");
         }
-
-        private void TimeDisplay_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Обновление отображения времени в окне настроек происходит в UpdateTimeDisplay
-        }
-
-        // События счетчиков
         private void DecrementButton1_Click(object sender, RoutedEventArgs e)
         {
             int currentValue = int.Parse(Count1.Text);
@@ -222,11 +223,10 @@ namespace ROR2TournamentCounter
         private void IncrementButton1_Click(object sender, RoutedEventArgs e)
         {
             int currentValue = int.Parse(Count1.Text);
-            if (currentValue < 5)
-            {
+            if (currentValue < GetMaxCount())
                 Count1.Text = (currentValue + 1).ToString();
-            }
         }
+
 
         private void DecrementButton2_Click(object sender, RoutedEventArgs e)
         {
@@ -240,10 +240,8 @@ namespace ROR2TournamentCounter
         private void IncrementButton2_Click(object sender, RoutedEventArgs e)
         {
             int currentValue = int.Parse(Count2.Text);
-            if (currentValue < 5)
-            {
+            if (currentValue < GetMaxCount())
                 Count2.Text = (currentValue + 1).ToString();
-            }
         }
 
         private void Count1_TextChanged(object sender, TextChangedEventArgs e)
@@ -265,7 +263,6 @@ namespace ROR2TournamentCounter
             displayWindow?.UpdateSurvivor(selectedSurvivor);
         }
 
-        // Генерация сида
         private void Gen_Seed_Click(object sender, RoutedEventArgs e)
         {
             int randomNumber = random.Next(0, 100000);
@@ -276,16 +273,12 @@ namespace ROR2TournamentCounter
         private void ShowNotification()
         {
             Storyboard storyboard = new Storyboard();
-
-            // Появление
             DoubleAnimation fadeIn = new DoubleAnimation
             {
                 From = 0,
                 To = 1,
                 Duration = TimeSpan.FromSeconds(0.2)
             };
-
-            // Исчезание (начинается после появления + 2 секунды)
             DoubleAnimation fadeOut = new DoubleAnimation
             {
                 From = 1,
@@ -304,21 +297,31 @@ namespace ROR2TournamentCounter
             storyboard.Children.Add(fadeOut);
             storyboard.Begin();
         }
-
-        // События загрузки стримов
         private void LoadStreamButton_Click(object sender, RoutedEventArgs e)
         {
             string twitchUrl = StreamUrlTextBox.Text.Trim();
-            LoadStream(twitchUrl);
+            LoadStream(displayWindow.StreamWebView, twitchUrl);
         }
 
         private void LoadStream2Button_Click(object sender, RoutedEventArgs e)
         {
             string twitchUrl = StreamUrl2TextBox.Text.Trim();
-            Load2Stream(twitchUrl);
+            LoadStream(displayWindow.Stream2WebView, twitchUrl);
         }
 
-        private void LoadStream(string twitchUrl)
+        private void LoadStream3Button_Click(object sender, RoutedEventArgs e)
+        {
+            string twitchUrl = StreamUrl3TextBox.Text.Trim();
+            LoadStream(displayWindow.Stream3WebView, twitchUrl);
+        }
+
+        private void LoadStream4Button_Click(object sender, RoutedEventArgs e)
+        {
+            string twitchUrl = StreamUrl4TextBox.Text.Trim();
+            LoadStream(displayWindow.Stream4WebView, twitchUrl);
+        }
+
+        private void LoadStream(WebView2 webView, string twitchUrl)
         {
             if (string.IsNullOrEmpty(twitchUrl))
             {
@@ -334,26 +337,7 @@ namespace ROR2TournamentCounter
                 return;
             }
 
-            displayWindow?.LoadTwitchStream(channelName);
-        }
-
-        private void Load2Stream(string twitchUrl)
-        {
-            if (string.IsNullOrEmpty(twitchUrl))
-            {
-                MessageBox.Show("Введите ссылку на канал Twitch", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            string channelName = ExtractChannelName(twitchUrl);
-
-            if (string.IsNullOrEmpty(channelName))
-            {
-                MessageBox.Show("Неверный формат ссылки Twitch", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            displayWindow?.Load2TwitchStream(channelName);
+            displayWindow?.LoadTwitchStream(webView, channelName);
         }
 
         private string ExtractChannelName(string input)
@@ -420,6 +404,61 @@ namespace ROR2TournamentCounter
         private void LanguageCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+        private void AnimateProperty(FrameworkElement element, DependencyProperty property, double from, double to, double durationMs = 300)
+        {
+            var animation = new DoubleAnimation
+            {
+                From = from,
+                To = to,
+                Duration = TimeSpan.FromMilliseconds(durationMs),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+            };
+            element.BeginAnimation(property, animation);
+        }
+
+        private void checkCoopMode_Checked(object sender, RoutedEventArgs e)
+        {
+            if (displayWindow == null) return;
+
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 337);
+            AnimateProperty(displayWindow.coopStreamContainer, FrameworkElement.HeightProperty, displayWindow.coopStreamContainer.ActualHeight, 337);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 600);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 600);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1200);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.HeightProperty, displayWindow.sContainers.ActualHeight, 670);
+            AnimateProperty(coop3, FrameworkElement.HeightProperty, coop3.ActualHeight, 20);
+            AnimateProperty(coop4, FrameworkElement.HeightProperty, coop4.ActualHeight, 20);
+            displayWindow.p1.FontSize = 15;
+            displayWindow.p2.FontSize = 15;
+            displayWindow.p3.FontSize = 15;
+            displayWindow.p4.FontSize = 15;
+            playerteam1.SetResourceReference(ContentProperty, "team1");
+            playerteam2.SetResourceReference(ContentProperty, "team2");
+            nameteam1.SetResourceReference(TextBlock.TextProperty, "team");
+            nameteam2.SetResourceReference(TextBlock.TextProperty, "team");
+        }
+
+        private void checkCoopMode_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (displayWindow == null) return;
+
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 478);
+            AnimateProperty(displayWindow.coopStreamContainer, FrameworkElement.HeightProperty, displayWindow.coopStreamContainer.ActualHeight, 0);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 850);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 850);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1700);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.HeightProperty, displayWindow.sContainers.ActualHeight, 650);
+            AnimateProperty(coop3, FrameworkElement.HeightProperty, coop3.ActualHeight, 0);
+            AnimateProperty(coop4, FrameworkElement.HeightProperty, coop4.ActualHeight, 0);
+            displayWindow.p1.FontSize = 25;
+            displayWindow.p2.FontSize = 25;
+            displayWindow.p3.FontSize = 25;
+            displayWindow.p4.FontSize = 25;
+            playerteam1.SetResourceReference(ContentProperty, "player1");
+            playerteam2.SetResourceReference(ContentProperty, "player2");
+            nameteam1.SetResourceReference(TextBlock.TextProperty, "nick");
+            nameteam2.SetResourceReference(TextBlock.TextProperty, "nick");
         }
     }
 }

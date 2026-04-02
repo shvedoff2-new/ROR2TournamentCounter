@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ROR2TournamentCounter"
         mc:Ignorable="d"
-        Title="ROR2 Tournament Counter - Settings" Height="350" Width="1100"
+        Title="ROR2 Tournament Counter - Settings" Height="450" Width="1100"
         AllowsTransparency="True" WindowStyle="None" Background="Transparent"
         Icon="/Resources/Images/logo.ico">
     <Grid Background="#90000000" MouseDown="Navigation_MouseDown">
@@ -13,8 +13,8 @@
             <Button x:Name="MinButton" Width="30" Height="20" Content="_" Margin="0,0,30,0" HorizontalAlignment="Right" Click="MinButton_Click" FontWeight="UltraBold" Style="{DynamicResource Btn}"/>
             <Button x:Name="CloseButton" Width="30" Height="20" Content="❌" HorizontalAlignment="Right" Click="CloseButton_Click" Style="{DynamicResource Btn}"/>
         </Grid>
-        <Border Height="350" Width="3" Background="#70FFFFFF" HorizontalAlignment="Left"/>
-        <Border Height="350" Width="3" Background="#70FFFFFF" HorizontalAlignment="Right"/>
+        <Border Height="450" Width="3" Background="#70FFFFFF" HorizontalAlignment="Left"/>
+        <Border Height="450" Width="3" Background="#70FFFFFF" HorizontalAlignment="Right"/>
         <Border Height="3" Width="1094" Background="#70FFFFFF" VerticalAlignment="Top"/>
         <Border Height="3" Width="1094" Background="#70FFFFFF" VerticalAlignment="Bottom"/>
         <Border Height="9" Width="3" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -26,10 +26,10 @@
         <Border Height="9" Width="3" Background="White" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <Border Height="3" Width="6" Background="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,3,0"/>
 
-        <StackPanel Height="320" Width="350" HorizontalAlignment="Left" Margin="20,25,0,0">
+        <StackPanel Height="400" Width="370" HorizontalAlignment="Left" Margin="20,25,0,0">
             <StackPanel x:Name="Player1">
-                <Label Content="{DynamicResource player1}" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
-                <TextBlock Text="{DynamicResource nick}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <Label x:Name="playerteam1" Content="{DynamicResource player1}" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <TextBlock x:Name="nameteam1" Text="{DynamicResource nick}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <TextBox x:Name="Nickname1" Margin="20,0,0,0" TextChanged="Nickname1_TextChanged" MaxLength="16" FontSize="15" Style="{DynamicResource TBNick}" Height="20" Width="200" HorizontalAlignment="Left"/>
                 <TextBlock Text="{DynamicResource twitch}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top" Margin="20,0,0,0">
@@ -44,6 +44,18 @@
                     Padding="10,5"
                     Style="{DynamicResource Btn}"/>
                 </StackPanel>
+                <StackPanel x:Name="coop3" Orientation="Horizontal" Height="0" VerticalAlignment="Top" Margin="20,10,0,0">
+                    <TextBox x:Name="StreamUrl3TextBox" FontSize="15" Height="20"
+                    Width="200" 
+                    Margin="0,0,10,0"
+                    VerticalAlignment="Center"
+                    Text="channelname" Style="{DynamicResource TBNick}"/>
+                    <Button x:Name="LoadStream3Button" Width="100"
+                        Content="{DynamicResource loadstream}"
+                        Click="LoadStream3Button_Click"
+                        Padding="10,5"
+                        Style="{DynamicResource Btn}"/>
+                </StackPanel>
                 <TextBlock Text="{DynamicResource count}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                     <Button Content="&lt;" x:Name="DecrementButton1" Click="DecrementButton1_Click" Style="{DynamicResource Btn}" FontSize="18" Width="20"/>
@@ -53,8 +65,8 @@
             </StackPanel>
 
             <StackPanel x:Name="Player2" Margin="0,20,0,0">
-                <Label Content="{DynamicResource player2}" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
-                <TextBlock Text="{DynamicResource nick}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <Label x:Name="playerteam2" Content="{DynamicResource player2}" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
+                <TextBlock x:Name="nameteam2" Text="{DynamicResource nick}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <TextBox x:Name="Nickname2" Margin="20,0,0,0" TextChanged="Nickname2_TextChanged" MaxLength="16" FontSize="15" Style="{DynamicResource TBNick}" Height="20" Width="200" HorizontalAlignment="Left"/>
                 <TextBlock Text="{DynamicResource twitch}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top" Margin="20,0,0,0">
@@ -69,6 +81,18 @@
                         Padding="10,5"
                         Style="{DynamicResource Btn}"/>
                 </StackPanel>
+                <StackPanel x:Name="coop4" Orientation="Horizontal" Height="0" VerticalAlignment="Top" Margin="20,10,0,0">
+                    <TextBox x:Name="StreamUrl4TextBox" FontSize="15" Height="20"
+                        Width="200" 
+                        Margin="0,0,10,0"
+                        VerticalAlignment="Center"
+                        Text="channelname" Style="{DynamicResource TBNick}"/>
+                    <Button x:Name="LoadStream4Button" Width="100"
+                        Content="{DynamicResource loadstream}"
+                        Click="LoadStream4Button_Click"
+                        Padding="10,5"
+                        Style="{DynamicResource Btn}"/>
+                </StackPanel>
                 <TextBlock Text="{DynamicResource count}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
                 <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                     <Button Content="&lt;" x:Name="DecrementButton2" Click="DecrementButton2_Click" Style="{DynamicResource Btn}" FontSize="18" Width="20"/>
@@ -78,15 +102,19 @@
             </StackPanel>
         </StackPanel>
 
-        <StackPanel x:Name="TournamentInfo" Width="370" Height="270" Margin="390,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <StackPanel x:Name="TournamentInfo" Width="370" Height="300" Margin="390,25,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Label Content="{DynamicResource info}" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
             <TextBlock Text="{DynamicResource tourname}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
-            <TextBox x:Name="TournamentName" Margin="20,0,0,0" TextChanged="TournamentName_TextChanged" MaxLength="18" FontSize="15" Style="{DynamicResource TBNick}" Height="20" Width="200" HorizontalAlignment="Left"/>
+            <ComboBox x:Name="BestOf" Margin="20,0,0,0" Style="{DynamicResource ComboBoxStyle}" Height="20" Width="200" HorizontalAlignment="Left">
+                <ComboBoxItem Content="Best of 3" Tag="bo3"/>
+                <ComboBoxItem Content="Best of 5" Tag="bo5"/>
+            </ComboBox>
             <TextBlock Text="{DynamicResource seed}" Margin="20,0,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
             <StackPanel Orientation="Horizontal" Margin="20,0,0,0">
                 <Button x:Name="Generate_seed" Content="{DynamicResource genseed}" Style="{DynamicResource Btn}" Click="Gen_Seed_Click" Width="100"/>
                 <TextBox x:Name="Seed" Margin="20,0,0,0" TextChanged="Seed_TextChanged" MaxLength="10" FontSize="15" Style="{DynamicResource TBNick}" Height="20" Width="80" HorizontalAlignment="Left"/>
             </StackPanel>
+            <CheckBox x:Name="checkCoopMode" Content="{DynamicResource coopmode}" FontFamily="{StaticResource Bombardier}" Foreground="White" Margin="20,10,0,0" Checked="checkCoopMode_Checked" Unchecked="checkCoopMode_Unchecked" Style="{DynamicResource CheckBoxStyle}" HorizontalAlignment="Left"/>
             <TextBlock Text="{DynamicResource survivor}" Margin="20,10,0,0" FontFamily="{DynamicResource Bombardier}" FontSize="15" Foreground="White"/>
             <UniformGrid Columns="8" Margin="20,0,0,0" x:Name="SurvivorRadioGrid" Height="130">
                 <RadioButton x:Name="Commando" GroupName="SurvivorGroup" Checked="SurvivorRadio_Checked" FontSize="15" Foreground="White" Tag="Commando" Style="{DynamicResource SurvivorRadioButtonCompactStyle}">
@@ -188,7 +216,7 @@
         </StackPanel>
         <StackPanel x:Name="Timer" Width="300" Height="120" HorizontalAlignment="Right" Margin="0,25,20,0" VerticalAlignment="Top">
             <Label Content="{DynamicResource timer}" FontSize="15" FontFamily="{DynamicResource Bombardier}" Foreground="White"/>
-            <TextBox x:Name="TimeDisplay" Text="00:00.00" IsReadOnly="True" TextChanged="TimeDisplay_TextChanged"
+            <TextBox x:Name="TimeDisplay" Text="00:00.00" IsReadOnly="True"
                FontSize="24" Style="{DynamicResource TBNick}" Height="30" Width="110"
                HorizontalAlignment="Left" 
                Margin="0,5"/>
