@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
@@ -416,15 +417,44 @@ namespace ROR2TournamentCounter
             };
             element.BeginAnimation(property, animation);
         }
+        private void AnimateTranslateX(FrameworkElement element, double from, double to, double durationMs = 300)
+        {
+            TranslateTransform transform = element.RenderTransform as TranslateTransform;
+
+            if (transform == null)
+            {
+                transform = new TranslateTransform();
+                element.RenderTransform = transform;
+            }
+
+            var animation = new DoubleAnimation
+            {
+                From = from,
+                To = to,
+                Duration = TimeSpan.FromMilliseconds(durationMs),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+            };
+
+            transform.BeginAnimation(TranslateTransform.XProperty, animation);
+        }
 
         private void checkCoopMode_Checked(object sender, RoutedEventArgs e)
         {
             if (displayWindow == null) return;
-
-            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 337);
-            AnimateProperty(displayWindow.coopStreamContainer, FrameworkElement.HeightProperty, displayWindow.coopStreamContainer.ActualHeight, 337);
+            screen_team1.Visibility = Visibility.Visible;
+            screen_team2.Visibility = Visibility.Visible;
+            screen_3.Visibility = Visibility.Visible;
+            screen_4.Visibility = Visibility.Visible;
+            screen_all.Visibility = Visibility.Visible;
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 674);
             AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 600);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.HeightProperty, displayWindow.Stream1Container.ActualHeight, 337);
             AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 600);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.HeightProperty, displayWindow.Stream2Container.ActualHeight, 337);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.WidthProperty, displayWindow.Stream3Container.ActualWidth, 600);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.HeightProperty, displayWindow.Stream3Container.ActualHeight, 337);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.WidthProperty, displayWindow.Stream4Container.ActualWidth, 600);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.HeightProperty, displayWindow.Stream4Container.ActualHeight, 337);
             AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1200);
             AnimateProperty(displayWindow.sContainers, FrameworkElement.HeightProperty, displayWindow.sContainers.ActualHeight, 670);
             AnimateProperty(coop3, FrameworkElement.HeightProperty, coop3.ActualHeight, 20);
@@ -442,23 +472,158 @@ namespace ROR2TournamentCounter
         private void checkCoopMode_Unchecked(object sender, RoutedEventArgs e)
         {
             if (displayWindow == null) return;
-
+            screen_team1.Visibility = Visibility.Hidden;
+            screen_team2.Visibility = Visibility.Hidden;
+            screen_3.Visibility = Visibility.Hidden;
+            screen_4.Visibility = Visibility.Hidden;
+            screen_all.Visibility = Visibility.Hidden;
             AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 478);
-            AnimateProperty(displayWindow.coopStreamContainer, FrameworkElement.HeightProperty, displayWindow.coopStreamContainer.ActualHeight, 0);
             AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 850);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.HeightProperty, displayWindow.Stream1Container.ActualHeight, 478);
             AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 850);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.HeightProperty, displayWindow.Stream2Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.WidthProperty, displayWindow.Stream3Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.HeightProperty, displayWindow.Stream3Container.ActualHeight, 0);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.WidthProperty, displayWindow.Stream4Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.HeightProperty, displayWindow.Stream4Container.ActualHeight, 0);
             AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1700);
             AnimateProperty(displayWindow.sContainers, FrameworkElement.HeightProperty, displayWindow.sContainers.ActualHeight, 650);
             AnimateProperty(coop3, FrameworkElement.HeightProperty, coop3.ActualHeight, 0);
             AnimateProperty(coop4, FrameworkElement.HeightProperty, coop4.ActualHeight, 0);
             displayWindow.p1.FontSize = 25;
             displayWindow.p2.FontSize = 25;
-            displayWindow.p3.FontSize = 25;
-            displayWindow.p4.FontSize = 25;
             playerteam1.SetResourceReference(ContentProperty, "player1");
             playerteam2.SetResourceReference(ContentProperty, "player2");
             nameteam1.SetResourceReference(TextBlock.TextProperty, "nick");
             nameteam2.SetResourceReference(TextBlock.TextProperty, "nick");
+        }
+
+        private void screen_1_Click(object sender, RoutedEventArgs e)
+        {
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 1156);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.HeightProperty, displayWindow.Stream1Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.HeightProperty, displayWindow.Stream2Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.WidthProperty, displayWindow.Stream3Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.HeightProperty, displayWindow.Stream3Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.WidthProperty, displayWindow.Stream4Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.HeightProperty, displayWindow.Stream4Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1156);
+        }
+
+        private void screen_2_Click(object sender, RoutedEventArgs e)
+        {
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.HeightProperty, displayWindow.Stream1Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 1156);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.HeightProperty, displayWindow.Stream2Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.WidthProperty, displayWindow.Stream3Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.HeightProperty, displayWindow.Stream3Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.WidthProperty, displayWindow.Stream4Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.HeightProperty, displayWindow.Stream4Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1156);
+            AnimateTranslateX(displayWindow.Stream2Container, -850, 0);
+        }
+
+        private void screen_1_2_Click(object sender, RoutedEventArgs e)
+        {
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 850);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.HeightProperty, displayWindow.Stream1Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 850);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.HeightProperty, displayWindow.Stream2Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.WidthProperty, displayWindow.Stream3Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.HeightProperty, displayWindow.Stream3Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.WidthProperty, displayWindow.Stream4Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.HeightProperty, displayWindow.Stream4Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1700);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.HeightProperty, displayWindow.sContainers.ActualHeight, 650);
+            AnimateTranslateX(displayWindow.Stream2Container, -850, 0);
+        }
+
+        private void screen_team1_Click(object sender, RoutedEventArgs e)
+        {
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 850);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.HeightProperty, displayWindow.Stream1Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.HeightProperty, displayWindow.Stream2Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.WidthProperty, displayWindow.Stream3Container.ActualWidth, 850);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.HeightProperty, displayWindow.Stream3Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.WidthProperty, displayWindow.Stream4Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.HeightProperty, displayWindow.Stream4Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1700);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.HeightProperty, displayWindow.sContainers.ActualHeight, 650);
+            AnimateTranslateX(displayWindow.Stream3Container, 0, 850);
+            AnimateTranslateX(displayWindow.Stream2Container, 0, 850);
+        }
+
+        private void screen_3_Click(object sender, RoutedEventArgs e)
+        {
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.HeightProperty, displayWindow.Stream1Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.HeightProperty, displayWindow.Stream2Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.WidthProperty, displayWindow.Stream3Container.ActualWidth, 1156);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.HeightProperty, displayWindow.Stream3Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.WidthProperty, displayWindow.Stream4Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.HeightProperty, displayWindow.Stream4Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1156);
+            AnimateTranslateX(displayWindow.Stream3Container, 850, 0);
+            AnimateTranslateX(displayWindow.Stream2Container, -850, 0);
+        }
+
+        private void screen_4_Click(object sender, RoutedEventArgs e)
+        {
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.HeightProperty, displayWindow.Stream1Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.HeightProperty, displayWindow.Stream2Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.WidthProperty, displayWindow.Stream3Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.HeightProperty, displayWindow.Stream3Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.WidthProperty, displayWindow.Stream4Container.ActualWidth, 1156);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.HeightProperty, displayWindow.Stream4Container.ActualHeight, 650);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1156);
+            AnimateTranslateX(displayWindow.Stream3Container, 850, 0);
+            AnimateTranslateX(displayWindow.Stream2Container, -850, 0);
+        }
+
+        private void screen_team2_Click(object sender, RoutedEventArgs e)
+        {
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.HeightProperty, displayWindow.Stream1Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 850);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.HeightProperty, displayWindow.Stream2Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.WidthProperty, displayWindow.Stream3Container.ActualWidth, 0);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.HeightProperty, displayWindow.Stream3Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.WidthProperty, displayWindow.Stream4Container.ActualWidth, 850);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.HeightProperty, displayWindow.Stream4Container.ActualHeight, 478);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1700);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.HeightProperty, displayWindow.sContainers.ActualHeight, 650);
+            AnimateTranslateX(displayWindow.Stream3Container, 0, 850);
+            AnimateTranslateX(displayWindow.Stream2Container, 0, -850);
+        }
+
+        private void screen_all_Click(object sender, RoutedEventArgs e)
+        {
+            AnimateProperty(displayWindow.mainStreamContainer, FrameworkElement.HeightProperty, displayWindow.mainStreamContainer.ActualHeight, 674);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.WidthProperty, displayWindow.Stream1Container.ActualWidth, 600);
+            AnimateProperty(displayWindow.Stream1Container, FrameworkElement.HeightProperty, displayWindow.Stream1Container.ActualHeight, 337);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.WidthProperty, displayWindow.Stream2Container.ActualWidth, 600);
+            AnimateProperty(displayWindow.Stream2Container, FrameworkElement.HeightProperty, displayWindow.Stream2Container.ActualHeight, 337);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.WidthProperty, displayWindow.Stream3Container.ActualWidth, 600);
+            AnimateProperty(displayWindow.Stream3Container, FrameworkElement.HeightProperty, displayWindow.Stream3Container.ActualHeight, 337);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.WidthProperty, displayWindow.Stream4Container.ActualWidth, 600);
+            AnimateProperty(displayWindow.Stream4Container, FrameworkElement.HeightProperty, displayWindow.Stream4Container.ActualHeight, 337);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.WidthProperty, displayWindow.sContainers.ActualWidth, 1200);
+            AnimateProperty(displayWindow.sContainers, FrameworkElement.HeightProperty, displayWindow.sContainers.ActualHeight, 670);
+            AnimateTranslateX(displayWindow.Stream3Container, 850, 0);
+            AnimateTranslateX(displayWindow.Stream2Container, -850, 0);
         }
     }
 }

@@ -13,8 +13,8 @@
         <StackPanel x:Name="sContainers" Height="650" Width="1700" VerticalAlignment="Bottom" ClipToBounds="True">
             <Grid x:Name="mainStreamContainer" Height="478">
                 <Grid x:Name="Stream1Container"
-                    Width="850"
-                    HorizontalAlignment="Left">
+                    Width="850" Height="478"
+                    HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Border Background="#90000000" Margin="5"/>
                     <Border Height="5" VerticalAlignment="Top" Background="#70FFFFFF" Margin="5"/>
                     <Border Height="5" VerticalAlignment="Bottom" Background="#70FFFFFF" Margin="5"/>
@@ -30,10 +30,13 @@
                     <Border Height="15" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="5" Margin="5"/>
                     <Label x:Name="p1" Content="{DynamicResource placeholder}" Foreground="#90FFFFFF" FontFamily="{DynamicResource Bombardier}" FontSize="25" Height="50" HorizontalAlignment="Center"/>
                     <wv2:WebView2 x:Name="StreamWebView" Visibility="Hidden"/>
+                    <Grid.RenderTransform>
+                        <TranslateTransform x:Name="Stream1Transform"/>
+                    </Grid.RenderTransform>
                 </Grid>
                 <Grid x:Name="Stream2Container"
-                    Width="850"
-                    HorizontalAlignment="Right">
+                    Width="850" Height="478"
+                    HorizontalAlignment="Right" VerticalAlignment="Top">
                     <Border Background="#90000000" Margin="5"/>
                     <Border Height="5" VerticalAlignment="Top" Background="#70FFFFFF" Margin="5"/>
                     <Border Height="5" VerticalAlignment="Bottom" Background="#70FFFFFF" Margin="5"/>
@@ -49,12 +52,13 @@
                     <Border Height="15" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="5" Margin="5"/>
                     <Label x:Name="p2" Content="{DynamicResource placeholder}" Foreground="#90FFFFFF" FontFamily="{DynamicResource Bombardier}" FontSize="25" Height="50" HorizontalAlignment="Center"/>
                     <wv2:WebView2 x:Name="Stream2WebView" Visibility="Hidden"/>
+                    <Grid.RenderTransform>
+                        <TranslateTransform x:Name="Stream2Transform"/>
+                    </Grid.RenderTransform>
                 </Grid>
-            </Grid>
-            <Grid x:Name="coopStreamContainer" Height="0">
                 <Grid x:Name="Stream3Container"
-                    Width="600" Height="337"
-                    HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        Width="0" Height="0"
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom">
                     <Border Background="#90000000" Margin="5"/>
                     <Border Height="5" VerticalAlignment="Top" Background="#70FFFFFF" Margin="5"/>
                     <Border Height="5" VerticalAlignment="Bottom" Background="#70FFFFFF" Margin="5"/>
@@ -70,10 +74,13 @@
                     <Border Height="15" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="5" Margin="5"/>
                     <Label x:Name="p3" Content="{DynamicResource placeholder}" Foreground="#90FFFFFF" FontFamily="{DynamicResource Bombardier}" FontSize="25" Height="50" HorizontalAlignment="Center"/>
                     <wv2:WebView2 x:Name="Stream3WebView" Visibility="Hidden"/>
+                    <Grid.RenderTransform>
+                        <TranslateTransform x:Name="Stream3Transform"/>
+                    </Grid.RenderTransform>
                 </Grid>
                 <Grid x:Name="Stream4Container"
-                    Width="600" Height="337"
-                    HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        Width="0" Height="0"
+                        HorizontalAlignment="Right" VerticalAlignment="Bottom">
                     <Border Background="#90000000" Margin="5"/>
                     <Border Height="5" VerticalAlignment="Top" Background="#70FFFFFF" Margin="5"/>
                     <Border Height="5" VerticalAlignment="Bottom" Background="#70FFFFFF" Margin="5"/>
@@ -89,6 +96,9 @@
                     <Border Height="15" Background="#FFFFFF" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="5" Margin="5"/>
                     <Label x:Name="p4" Content="{DynamicResource placeholder}" Foreground="#90FFFFFF" FontFamily="{DynamicResource Bombardier}" FontSize="25" Height="50" HorizontalAlignment="Center"/>
                     <wv2:WebView2 x:Name="Stream4WebView" Visibility="Hidden"/>
+                    <Grid.RenderTransform>
+                        <TranslateTransform x:Name="Stream4Transform"/>
+                    </Grid.RenderTransform>
                 </Grid>
             </Grid>
         </StackPanel>

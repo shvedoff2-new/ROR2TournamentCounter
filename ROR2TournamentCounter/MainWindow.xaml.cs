@@ -16,7 +16,7 @@ namespace ROR2TournamentCounter
         private const double BaseFontSize = 75;
         private const int BaseCharLimit = 7;
         private double _maskOffsetX = 0; // смещение паттерна
-        private const double Speed = 100; // пикселей в секунду (регулируй под себя)
+        private const double Speed = 100; // пикселей в секунду
         private DateTime _lastRender;
         public MainWindow()
         {
@@ -296,7 +296,7 @@ namespace ROR2TournamentCounter
             {
                 double scaleFactor = (double)BaseCharLimit / textLength;
                 double newFontSize = BaseFontSize * scaleFactor;
-                textBox.FontSize = Math.Max(newFontSize, 35);
+                textBox.FontSize = Math.Max(newFontSize, 20);
             }
         }
     }
