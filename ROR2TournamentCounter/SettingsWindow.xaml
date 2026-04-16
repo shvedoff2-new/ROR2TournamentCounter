@@ -245,19 +245,20 @@
             <ComboBoxItem Content="English" Tag="en"/>
             <ComboBoxItem Content="Русский" Tag="ru"/>
         </ComboBox>
-        <StackPanel x:Name="Buttons" Width="300" Height="120" Margin="0,165,20,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+        <StackPanel x:Name="Buttons" Width="300" Height="190" Margin="0,165,20,0" HorizontalAlignment="Right" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="screen_1" Height="50" Width="50" Style="{DynamicResource Btn}" Margin="20,0,20,0" Content="1" FontSize="30" Click="screen_1_Click"/>
                 <Button x:Name="screen_2" Height="50" Width="50" Style="{DynamicResource Btn}" Margin="0,0,20,0" Content="2" FontSize="30" Click="screen_2_Click"/>
                 <Button x:Name="screen_1_2" Height="50" Width="50" Style="{DynamicResource Btn}" Margin="0,0,20,0" Content="1 | 2" FontSize="30" Click="screen_1_2_Click"/>
-                <Button x:Name="screen_team1" Height="50" Width="50" Style="{DynamicResource Btn}" Content="T 1" FontSize="30" Click="screen_team1_Click" Visibility="Hidden"/>
+                <Button x:Name="screen_3_4" Height="50" Width="50" Style="{DynamicResource Btn}" Content="3 | 4" FontSize="30" Click="screen_3_4_Click" HorizontalAlignment="Left" Visibility="Hidden"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
                 <Button x:Name="screen_3" Height="50" Width="50" Style="{DynamicResource Btn}" Margin="20,0,20,0" Content="3" FontSize="30" Click="screen_3_Click" Visibility="Hidden"/>
                 <Button x:Name="screen_4" Height="50" Width="50" Style="{DynamicResource Btn}" Margin="0,0,20,0" Content="4" FontSize="30" Click="screen_4_Click" Visibility="Hidden"/>
-                <Button x:Name="screen_team2" Height="50" Width="50" Style="{DynamicResource Btn}" Margin="0,0,20,0" Content="T 2" FontSize="28" Click="screen_team2_Click" Visibility="Hidden"/>
-                <Button x:Name="screen_all" Height="50" Width="50" Style="{DynamicResource Btn}" Margin="0,0,20,0" Content="All" FontSize="30" Click="screen_all_Click" Visibility="Hidden"/>
+                <Button x:Name="screen_team1" Height="50" Width="50" Style="{DynamicResource Btn}" Content="T 1" Margin="0,0,20,0" FontSize="30" Click="screen_team1_Click" Visibility="Hidden"/>
+                <Button x:Name="screen_team2" Height="50" Width="50" Style="{DynamicResource Btn}" Content="T 2" FontSize="28" Click="screen_team2_Click" Visibility="Hidden"/>
             </StackPanel>
+            <Button x:Name="screen_all" Height="50" Width="50" Style="{DynamicResource Btn}" Margin="20,20,0,0" Content="All" FontSize="30" Click="screen_all_Click" Visibility="Hidden" HorizontalAlignment="Left"/>
         </StackPanel>
         
 

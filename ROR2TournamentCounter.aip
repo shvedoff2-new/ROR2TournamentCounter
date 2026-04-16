@@ -6,10 +6,10 @@
     <ROW Property="ARPCOMMENTS" Value="This installer database contains the logic and data required for installation [|ProductName]." ValueLocId="*"/>
     <ROW Property="ARPPRODUCTICON" Value="logo.exe" Type="8"/>
     <ROW Property="Manufacturer" Value="shvedoff2"/>
-    <ROW Property="ProductCode" Value="1049:{0D4ED0A8-5A92-4230-9B13-CE02664390E6} " Type="16"/>
+    <ROW Property="ProductCode" Value="1049:{1B4B6865-5946-4D62-8AD9-1D3A576B512B} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
     <ROW Property="ProductName" Value="ROR2TournamentCounter"/>
-    <ROW Property="ProductVersion" Value="2.2.1" Options="32"/>
+    <ROW Property="ProductVersion" Value="2.2.2" Options="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{87275612-FC64-4DA0-B2B1-471E7AA05F22}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="AnyCPU_Release:Windows 9x/ME" ValueLocId="-"/>
