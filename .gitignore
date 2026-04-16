@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+/ROR2TournamentCounter-AnyCPU_Release-SetupFiles/
+/ROR2TournamentCounter-cache/part1/
+
+*.msi
+*.cab
